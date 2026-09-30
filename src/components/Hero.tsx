@@ -1,4 +1,4 @@
-import { hero, profile } from '../data/content';
+import { hero, profile, selectedWork } from '../data/content';
 
 export default function Hero() {
   return (
@@ -15,8 +15,10 @@ export default function Hero() {
 
           <div className="hero__grid">
             <div className="hero__text">
+              <p className="hero__hello">Hello, I&rsquo;m</p>
               <h1 className="hero__name">{profile.name}</h1>
               <p className="hero__role">{hero.role}</p>
+              <p className="hero__intro">{hero.intro}</p>
               <div className="hero__meta">
                 <span className="cap cap--signal">{profile.scope}</span>
                 <span className="cap cap--ghost">{profile.location}</span>
@@ -40,7 +42,11 @@ export default function Hero() {
               </div>
             ))}
           </div>
-          <div className="hero__cue">Selected work</div>
+
+          <div className="selected">
+            <h2 className="selected__title">{selectedWork.title}</h2>
+            <p className="selected__body">{selectedWork.body}</p>
+          </div>
         </div>
       </section>
     </>

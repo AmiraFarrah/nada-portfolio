@@ -1,4 +1,4 @@
-# Nada Abessi — Portfolio
+# Nada Abessi · Portfolio
 
 Vite + React + TypeScript. No CSS framework, no runtime dependencies beyond React.
 
@@ -21,16 +21,12 @@ All text is in `src/data/`. You should never need to open a component to change 
 
 | File | What's in it |
 |---|---|
-| `src/data/content.ts` | Profile, hero, opening statement, SEO case list, tools, footer |
-| `src/data/campaigns.ts` | Hult Prize and Aussui campaign blocks |
-| `src/data/editorial.ts` | The two-up block: internal comms + editorial/traffic |
+| `src/data/content.ts` | Profile, hero, skill cards, "selected work" intro, tools, footer |
+| `src/data/belgium.ts` | 01 AIESEC in Belgium: newsletters, map of local committees, coaching |
+| `src/data/campaigns.ts` | 02 Hult Prize, 03 NAT'CO, 04 DREST |
 
-Search the whole `src/data` folder for **`TODO`** — every field that still needs
-real information is marked. Nothing else needs editing.
-
-```bash
-grep -rn "TODO" src/data
-```
+Coaching photos for Belgium: add the files to `public/media/belgium/` and put
+their paths in `coaching.photos` inside `src/data/belgium.ts`.
 
 ## Where the media lives
 
@@ -58,12 +54,14 @@ broken image, so the site is presentable before every file is in place.
 
 ## Design system
 
+Colours and fonts match the CV / portfolio PDF.
+
 | Token | Value | Use |
 |---|---|---|
-| `--ink` | `#14100C` | dark band background |
-| `--paper` | `#F7F3EC` | light band background |
-| `--paper-dim` | `#EAE3D7` | alternate light band |
-| `--signal` | `#C4562F` | accent: numbers, labels, links |
+| `--ink` | `#19007D` | indigo band background |
+| `--paper` | `#F7F6FB` | light band background |
+| `--signal` | `#B10024` | red accent on light bands |
+| `--signal-soft` | `#FF6B81` | red accent on indigo bands |
 
-Display type **Fraunces**, body type **Inter**, both from Google Fonts.
+Display type **Anton**, body type **Poppins**, both from Google Fonts.
 All tokens are at the top of `src/styles/portfolio.css`.

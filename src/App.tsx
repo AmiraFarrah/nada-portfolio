@@ -1,13 +1,13 @@
 import './styles/portfolio.css';
 
 import Hero from './components/Hero';
-import Band from './components/Band';
+import BelgiumBlock from './components/BelgiumBlock';
 import CampaignBlock from './components/CampaignBlock';
-import EditorialBlock from './components/EditorialBlock';
-import CaseList from './components/CaseList';
 
-import { profile, seoSection, tools, footer } from './data/content';
+import { profile, toolGroups, footer } from './data/content';
 import { campaigns } from './data/campaigns';
+
+const byId = (id: string) => campaigns.find((c) => c.id === id)!;
 
 export default function App() {
   return (
@@ -15,45 +15,41 @@ export default function App() {
       <Hero />
 
       <main className="sheet">
-        
+        {/* 01 · AIESEC in Belgium */}
+        <BelgiumBlock tone="paper" />
 
-        {/* 01 — Hult Prize */}
-        <CampaignBlock campaign={campaigns[0]} tone="ink" />
+        {/* 02 · Hult Prize */}
+        <CampaignBlock campaign={byId('hult-prize')} tone="ink" />
 
-        {/* 02 — Aussui */}
-        <CampaignBlock campaign={campaigns[1]} tone="dim" />
+        {/* 03 · AIESEC in Tunisia, NAT'CO */}
+        <CampaignBlock campaign={byId('natco')} tone="dim" />
 
-        {/* 03 — NATCO 2021 */}
-        <CampaignBlock campaign={campaigns[2]} tone="ink" />
-
-        {/* 04 — Drest employee engagement */}
-        <CampaignBlock campaign={campaigns[3]} tone="dim" />
-
-        {/* 05 — Editorial / internal comms */}
-        <EditorialBlock tone="paper" />
-
-        {/* 04 — SEO */}
-        <Band id={seoSection.id} tone="ink" num={seoSection.num} title={seoSection.title} lead={seoSection.lead}>
-          <CaseList items={seoSection.items} />
-        </Band>
+        {/* 04 · DREST */}
+        <CampaignBlock campaign={byId('drest')} tone="ink" />
 
         {/* Tools + contact */}
-        <section className="band band--ink foot">
+        <section className="band band--deep foot">
           <div className="wrap">
-            <div className="tools" style={{ marginBottom: '3.5rem' }}>
-              {tools.map((t) => (
-                <span className="tool" key={t}>
-                  {t}
-                </span>
+            <div className="toolgroups">
+              {toolGroups.map((g) => (
+                <div className="toolgroup" key={g.label}>
+                  <div className="toolgroup__label">{g.label}</div>
+                  <div className="tools">
+                    {g.items.map((t) => (
+                      <span className="tool" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
 
             <div className="foot__grid">
               <div>
-                <h2 style={{ maxWidth: '16ch' }}>{footer.headline}</h2>
-                <p style={{ marginTop: '1.4rem', fontSize: '0.9rem', color: 'var(--on-ink-muted)' }}>
-                  {footer.languages}
-                </p>
+                <h2 style={{ maxWidth: '18ch' }}>{footer.headline}</h2>
+                <p style={{ marginTop: '1.2rem' }}>{footer.sub}</p>
+                <p style={{ marginTop: '0.6rem', fontSize: '0.9rem', color: 'var(--on-ink-muted)' }}>{footer.languages}</p>
               </div>
               <div>
                 <p style={{ margin: 0 }}>
@@ -64,9 +60,7 @@ export default function App() {
                     {profile.linkedinLabel}
                   </a>
                 </p>
-                <p style={{ margin: '0.5rem 0 0', color: 'var(--on-ink-muted)', fontSize: '0.9rem' }}>
-                  {profile.location}
-                </p>
+                <p style={{ margin: '0.5rem 0 0', color: 'var(--on-ink-muted)', fontSize: '0.9rem' }}>{profile.location}</p>
               </div>
             </div>
 

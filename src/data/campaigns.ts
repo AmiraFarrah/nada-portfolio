@@ -1,9 +1,7 @@
 /* ============================================================
    CAMPAIGNS.TS
-   One entry per campaign: why it existed, who it had to move,
-   when it ran, and the pieces that carried it.
-
-   Search for "TODO" — those are the fields only Nada can fill.
+   Hult Prize, NAT'CO and DREST.
+   (AIESEC in Belgium has its own file: belgium.ts)
    ============================================================ */
 
 export type Kpi = { n: string; l: string };
@@ -12,13 +10,15 @@ export type TimelineStep = { when: string; what: string };
 export type Asset = {
   id: string;
   title: string;
-  src?: string;      // /media/video/... — leave undefined to show a placeholder
-  poster?: string;   // /media/posters/...
-  image?: string;    // use instead of src for a still
+  src?: string; // /media/video/...
+  poster?: string; // /media/posters/...
+  image?: string; // use instead of src for a still
   badge?: string;
-  why: string;       // why this piece was made the way it was
-  link?: string;     // optional external link (e.g. the live post)
+  why: string; // caption under the video: purpose and content
+  link?: string;
 };
+
+export type Photo = { src?: string; caption: string; tall?: boolean };
 
 export type Campaign = {
   id: string;
@@ -26,206 +26,234 @@ export type Campaign = {
   title: string;
   org: string;
   period: string;
-  objective: string;
-  audience: string;
-  approach: string;
+  intro: string[];
+  audience?: string;
+  approach?: string;
   kpis: Kpi[];
+  kpiNote?: string;
+  timelineTitle?: string;
   timeline: TimelineStep[];
+  photos?: Photo[];
+  assetsTitle?: string;
   assets: Asset[];
-  materials?: { src?: string; caption: string }[];
-  note?: string;
+  extra?: { title: string; body: string[]; photos?: Photo[] };
+  tools?: string;
 };
 
 export const campaigns: Campaign[] = [
   /* ----------------------------------------------------------
-     01 — HULT PRIZE, FULL CYCLE
+     HULT PRIZE
      ---------------------------------------------------------- */
   {
     id: 'hult-prize',
-    num: '01',
-    title: 'One competition, three different asks',
-    org: 'Hult Prize — IHEC Sousse',
-    period: 'TODO — confirm the cycle (see note below)',
-    objective:
-      'Take a student body that had mostly never heard of the Hult Prize through a full cycle: sign up, understand what they had signed up for, and still be interested by the time the next edition opened.',
-    audience:
-      'University students in Tunisia. Two distinct states of knowledge — people who had never encountered the competition, and people already competing who needed to actually build something.',
+    num: '02',
+    title: 'Hult Prize: from "what is that?" to "when is the next one?"',
+    org: 'Hult Prize · OnCampus program, Sousse',
+    period: 'One full edition, from launch to final',
+    intro: [
+      'I built awareness and kept students engaged around the Hult Prize, an international competition where students create a social business idea and pitch it to judges, first on campus and then on the international stage.',
+      'Most students had never heard of it. Step by step, from awareness to registration, team building, the competition and what came after, they became active participants who were still following us when the next edition opened.',
+    ],
+    audience: 'University students, most of them new to the Hult Prize and to social entrepreneurship.',
     approach:
-      'The same campaign could not speak to both. So it ran as three phases with three different jobs. Recruitment had to create curiosity and remove the excuse of not knowing what it was. Educational content had to make participants better at the thing they had entered, which is what keeps people from dropping out halfway. The final had to close the loop publicly, so the next edition opened to an audience that had already seen what the end looks like.',
+      'Start with the cause, not the competition. Then explain it simply. Then let the final and the students tell the story for us.',
     kpis: [
-      { n: 'TODO', l: 'registrations' },
-      { n: 'TODO', l: 'teams competing' },
-      { n: 'TODO', l: 'reach across the cycle' },
+      { n: '120', l: 'students registered' },
+      { n: '10', l: 'teams in the competition' },
+      { n: '3', l: 'phases, one clear goal each' },
     ],
+    timelineTitle: 'How the campaign worked',
     timeline: [
-      { when: 'Phase 1', what: 'Recruitment — awareness, then a dated ask with a form behind it' },
-      { when: 'Phase 2', what: 'Educational content for registered participants' },
-      { when: 'Phase 3', what: 'The final, filmed and published as the opening move for the next edition' },
+      {
+        when: 'Phase 1 · Attraction and recruitment',
+        what: 'We did not open with the competition. We opened with social entrepreneurship and the real problems students already cared about. Only then did we introduce the Hult Prize, with a clear date to register.',
+      },
+      {
+        when: 'Phase 2 · Education and conversion',
+        what: 'Signing up was only the start. Short educational content explained how the competition works and what teams were expected to do, so the people who registered came in ready.',
+      },
+      {
+        when: 'Phase 3 · Competition and continuity',
+        what: 'We filmed the campus final and shared it. The pitches and the students’ own experience became the content that made others want to join the next edition.',
+      },
     ],
+    photos: [
+      { src: '/media/hult/hult-oncampus-team.jpg', caption: 'The organising team on event day.' },
+      { src: '/media/hult/hult-oc-team.jpg', caption: 'Launch post for the OnCampus event, with the team and participants.' },
+    ],
+    assetsTitle: 'The videos, in the order they were published',
     assets: [
       {
         id: 'h-social-ent',
-        title: 'What social entrepreneurship actually is',
+        title: 'Why social entrepreneurship matters',
         src: '/media/video/hult-social-entrepreneurship.mp4',
         poster: '/media/posters/hult-social-entrepreneurship.jpg',
         badge: 'Attraction',
-        why:
-          'TODO — the first ask is not "apply", it is "you already care about this". Say in your own words why the campaign opened on the idea rather than on the competition.',
+        why: 'The first video of the campaign. It talks about social entrepreneurship and the problems around us, not about a competition. The idea was to make students care before asking them for anything.',
       },
       {
         id: 'h-join',
-        title: 'Join us Wednesday, November 15th',
+        title: 'Join us on November 15th',
         src: '/media/video/hult-join-us-nov15.mp4',
         poster: '/media/posters/hult-join-us-nov15.jpg',
-        badge: 'Conversion',
-        why:
-          'TODO — a date, a place and one instruction. Why this piece came second rather than first.',
+        badge: 'Registration',
+        why: 'Students asking each other on camera what the Hult Prize is. Light, curious and local, with one clear ask at the end: come to the info session on a set date.',
       },
       {
         id: 'h-form',
-        title: 'The form stays open',
+        title: 'Registrations are still open',
         src: '/media/video/hult-form-extended.mp4',
         poster: '/media/posters/hult-form-extended.jpg',
         badge: 'Second chance',
-        why:
-          'TODO — an extension is usually a sign a campaign underperformed. Framed as a second chance it becomes a reason to post again. Was that the thinking?',
-      },
-      {
-        id: 'h-nichesss',
-        title: 'Content tooling for participants',
-        src: '/media/video/nichesss-content-tool.mp4',
-        poster: '/media/posters/nichesss-content-tool.jpg',
-        badge: 'Education',
-        why:
-          'TODO — CONFIRM THIS BELONGS HERE. This is a walkthrough of an AI writing tool. If it was part of the educational phase, say what problem participants had that it solved. If it belongs to a different project, tell me and I will move it.',
+        why: 'Participants explain in their own words what the Hult Prize means: a life changing opportunity and a real social impact. Used to give more time to the students who were still hesitating.',
       },
       {
         id: 'h-day',
-        title: 'Hult Prize day',
+        title: 'Inside the event',
         src: '/media/video/hult-prize-day.mp4',
         poster: '/media/posters/hult-prize-day.jpg',
         badge: 'Event',
-        why:
-          'TODO — what was this cut for: recap for the people who came, or proof for the people who did not?',
+        why: 'Workshops, team work and pitches, filmed on the day. It showed participants their own experience and showed everyone else what they had missed.',
       },
       {
         id: 'h-winners',
-        title: 'The winning team',
+        title: 'Meet the winning team',
         src: '/media/video/hult-winners-announcement.mp4',
         poster: '/media/posters/hult-winners-announcement.jpg',
         badge: 'Result',
-        why:
-          'TODO — why announce the winner publicly rather than privately? (Recognition for them, credibility for the next intake — in your own words.)',
+        why: 'A short announcement of the campus winners. It celebrated the team publicly and showed the next students what is possible.',
       },
       {
         id: 'h-champions',
-        title: 'The champions',
+        title: 'The final, as it happened',
         src: '/media/video/hult-the-champions.mp4',
         poster: '/media/posters/hult-the-champions.jpg',
-        badge: 'Result',
-        why: 'TODO — how this one differed from the announcement above.',
-      },
-      {
-        id: 'h-final-post',
-        title: 'The final — on Instagram',
-        badge: 'Live post',
-        link: 'https://www.instagram.com/p/CpdajnMg64p/',
-        why:
-          'The published post, still live. Opens on Instagram. TODO — replace with the hosted file once the original is recovered.',
-      },
-    ],
-    note:
-      'TODO — DATE CONFLICT: the tracker says Feb 2022 (recruitment) and Apr 2022 (final), but the recruitment videos say "Wednesday, November 15th", which falls on a Wednesday in 2023, not 2022. Confirm whether this is one cycle or two separate editions.',
-  },
-
-  /* ----------------------------------------------------------
-     02 — AUSSUI
-     ---------------------------------------------------------- */
-  {
-    id: 'aussui',
-    num: '02',
-    title: 'Two audiences, one storefront',
-    org: 'Aussui',
-    period: 'TODO — dates',
-    objective:
-      'Get gamers and resellers to recognise Aussui and land on the site, rather than defaulting to the platforms they already use.',
-    audience:
-      'Gamers looking for specific titles and top-ups, and resellers looking for reliable supply. Different vocabulary, different urgency, different reason to trust a storefront they have not bought from before.',
-    approach:
-      'TODO — describe the approach. The tension worth writing about: one brand talking to a consumer and a trade audience at once. Separate creative, separate channels, separate landing pages?',
-    kpis: [
-      { n: 'TODO', l: 'reach' },
-      { n: 'TODO', l: 'site visits' },
-      { n: 'TODO', l: 'engagement rate' },
-    ],
-    timeline: [],
-    assets: [
-      {
-        id: 'a-console',
-        title: 'Console or mobile',
-        src: '/media/video/aussui-console-or-mobile.mp4',
-        poster: '/media/posters/aussui-console-or-mobile.jpg',
-        badge: 'Awareness',
-        why:
-          'TODO — ten seconds, one line, one URL. What was this built to do, and where did it run?',
-      },
-      {
-        id: 'a-affordable',
-        title: 'Gaming, affordable',
-        src: '/media/video/aussui-affordable-gaming.mp4',
-        poster: '/media/posters/aussui-affordable-gaming.jpg',
-        badge: 'Offer',
-        why: 'TODO — price is the argument here rather than range. Why that order?',
+        badge: 'Recap',
+        why: 'The recap of the final day: the energy, the pitches and the moment the winners were announced. This is the video that kept people talking until the next edition.',
       },
     ],
   },
 
   /* ----------------------------------------------------------
-     03 — NATCO 2021
+     NAT'CO
      ---------------------------------------------------------- */
   {
     id: 'natco',
     num: '03',
-    title: 'The biggest conference AIESEC runs in Tunisia',
-    org: 'AIESEC in Tunisia — NATCO',
+    title: 'NAT’CO: a conference people lived before, during and after',
+    org: 'AIESEC in Tunisia · NAT’CO national conference',
     period: 'December 2021',
-    objective:
-      'Run people engagement and experience showcasing for a national conference with a thousand delegates in the room and thirty sponsor partners watching how it was run.',
-    audience:
-      'A thousand young delegates from across Tunisia, and thirty sponsor partners whose decision to come back the following year depended on what they saw.',
-    approach:
-      'TODO — this is the largest thing on the site by audience size, and currently the thinnest by detail. What did "people engagement" mean day to day? What did you actually produce or run, and how did you showcase the experience to the sponsors?',
-    kpis: [
-      { n: '1,000', l: 'youth delegates' },
-      { n: '30', l: 'sponsor partners' },
-      { n: 'TODO', l: 'add a third — sessions, content pieces, satisfaction score' },
+    intro: [
+      'From anticipation to memories. The conference lasted three days, but I wanted the experience to start weeks before the first day and to stay with people long after the last one.',
+      'So I built the content in three moments: before, during and after. The goal was simple. Keep delegates involved the whole time and turn what they lived into content they wanted to share.',
     ],
-    timeline: [],
+    audience:
+      'More than 1,000 young delegates, the organising committee, and sponsor partners who wanted to see real engagement.',
+    approach:
+      'Make delegates the heroes of the content. What they posted, shared and remembered was also the clearest proof for sponsors that people were truly involved.',
+    kpis: [
+      { n: '1,000+', l: 'delegates' },
+      { n: '22', l: 'people in the organising committee' },
+      { n: '30', l: 'sponsor partners' },
+    ],
+    timelineTitle: 'Three moments, one experience',
+    timeline: [
+      {
+        when: 'Phase 01 · Anticipate',
+        what: 'Before the conference: fun and emotional videos, Reels, simple challenges and mini vlogs from each local committee to build excitement and get people talking.',
+      },
+      {
+        when: 'Phase 02 · Engage',
+        what: 'During the conference: daily Reels, questions, challenges, memes and live coverage. We captured the moments of delegates, the organising team and sponsors as they happened.',
+      },
+      {
+        when: 'Phase 03 · Extend',
+        what: 'After the conference: all the photos and videos became recaps, highlights and an after movie told from the local committees’ point of view, so the three days kept living online.',
+      },
+    ],
+    photos: [
+      { src: '/media/natco/natco-audience.jpg', caption: 'A full room of delegates, ready for the day.' },
+      { src: '/media/natco/natco-team.jpg', caption: 'Part of the organising committee. Hold the vision, trust the process.' },
+    ],
     assets: [],
-    note: 'Assets to be added — photos, recap video or sponsor-facing material would carry this section.',
+    extra: {
+      title: 'Member newsletters',
+      body: [
+        'Inside AIESEC I also wrote the monthly newsletter for the members of a local committee. What happened last month, updates from each department and a short word from the team to keep everyone moving in the same direction.',
+      ],
+      photos: [
+        { src: '/media/newsletters/member-newsletter-cover.jpg', caption: 'The opening: a friendly hello before the updates.', tall: true },
+        { src: '/media/newsletters/member-newsletter-department.jpg', caption: 'Department updates with real numbers, plus a word from the managers.', tall: true },
+        { src: '/media/newsletters/member-newsletter-updates.jpg', caption: 'What is coming next for the whole committee.', tall: true },
+      ],
+    },
   },
 
   /* ----------------------------------------------------------
-     04 — DREST EMPLOYEE ENGAGEMENT
+     DREST
      ---------------------------------------------------------- */
   {
-    id: 'drest-engagement',
+    id: 'drest',
     num: '04',
-    title: 'Getting colleagues in front of the camera',
-    org: 'Drest.tn',
-    period: 'TODO — dates',
-    objective:
-      'TODO — what was employee engagement supposed to fix here? Recruitment, internal morale, brand reach, or all three?',
-    audience: 'Drest employees.',
-    approach:
-      'TODO — short-form video (TikTok and reels) made with colleagues rather than about them. Describe how you got people who are not performers to take part, and who the finished videos were actually for.',
-    kpis: [
-      { n: 'TODO', l: 'videos published' },
-      { n: 'TODO', l: 'participation' },
-      { n: 'TODO', l: 'views or engagement' },
+    title: 'DREST: content made with the team, not just about it',
+    org: 'Drest.tn · Traffic Manager',
+    period: 'February 2026 to today',
+    intro: [
+      'At Drest I take care of what customers read and watch, and I also make sure the team feels part of the brand. I handle every video from start to finish: the idea, the script, the filming and the editing.',
+      'The same videos do two jobs. Inside, they bring colleagues together and make them proud to share. Outside, they show customers the real people behind the brand.',
     ],
+    audience: 'Drest customers, and the Drest team itself.',
+    approach:
+      'Put real colleagues in front of the camera. On the email side, every newsletter is tested, sent and then measured, so the next one is better.',
+    kpis: [
+      { n: '96.8%', l: 'emails delivered' },
+      { n: '20.3%', l: 'open rate' },
+      { n: '4.81%', l: 'click rate' },
+      { n: '0.32%', l: 'unsubscribed' },
+    ],
+    kpiNote: 'Results of one newsletter campaign sent with Brevo.',
     timeline: [],
-    assets: [],
-    note: 'Assets to be added — even two of the reels would make this section work.',
+    assetsTitle: 'Videos and newsletters',
+    assets: [
+      {
+        id: 'd-womens-day',
+        title: 'Women’s Day with the team',
+        src: '/media/video/drest-womens-day.mp4',
+        poster: '/media/posters/drest-womens-day.jpg',
+        badge: 'Employee engagement',
+        why: 'The women of the team got a surprise gift, on camera. A warm moment inside the company that also became a brand post customers loved to see.',
+      },
+      {
+        id: 'd-turning-5',
+        title: 'Something is cooking: Drest turns 5',
+        src: '/media/video/drest-turning-5.mp4',
+        poster: '/media/posters/drest-turning-5.jpg',
+        badge: 'Brand content',
+        why: 'A teaser for the 5th anniversary. A pink envelope travels from hand to hand across the office until the big reveal. Short, curious and made to be shared.',
+      },
+      {
+        id: 'd-newsletter-summer',
+        title: 'A summer care newsletter',
+        src: '/media/video/drest-newsletter-scroll.mp4',
+        poster: '/media/posters/drest-newsletter-scroll.jpg',
+        badge: 'Newsletter',
+        why: 'A product newsletter built in Brevo. Clear sections, strong visuals and one simple action for the reader.',
+      },
+      {
+        id: 'd-newsletter-bac',
+        title: 'Ready for the sports exam?',
+        image: '/media/drest/newsletter-bac-sport.jpg',
+        badge: 'Newsletter',
+        why: 'A seasonal newsletter for students before their sports exam. The subject line, the preview text and the offer all speak to one moment in their year.',
+      },
+    ],
+    extra: {
+      title: 'Writing and reporting',
+      body: [
+        'I also write and edit articles for the website and publish them in the CMS. Then I build Looker Studio dashboards so the marketing and commercial teams can see what the traffic is really doing, and I work with Power BI for metrics and reporting.',
+        'Writing the article and reporting on it a month later changes how you write. You stop producing content for the sake of it and start writing what people are actually looking for.',
+      ],
+    },
+    tools: 'Brevo, WordPress, Google Analytics, Looker Studio, Power BI, CapCut, Canva',
   },
 ];
