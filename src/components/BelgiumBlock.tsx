@@ -1,10 +1,14 @@
-import { belgium as b } from '../data/belgium';
-import BelgiumMap from './BelgiumMap';
-import Metrics from './Metrics';
-import PhotoGrid from './PhotoGrid';
-import Reveal from './Reveal';
+import { belgium as b } from "../data/belgium";
+import BelgiumMap from "./BelgiumMap";
+import Metrics from "./Metrics";
+import PhotoGrid from "./PhotoGrid";
+import Reveal from "./Reveal";
 
-export default function BelgiumBlock({ tone }: { tone: 'paper' | 'ink' | 'dim' }) {
+export default function BelgiumBlock({
+  tone,
+}: {
+  tone: "paper" | "ink" | "dim";
+}) {
   return (
     <section id={b.id} className={`band band--${tone}`}>
       <div className="wrap">
@@ -33,7 +37,10 @@ export default function BelgiumBlock({ tone }: { tone: 'paper' | 'ink' | 'dim' }
           ))}
           <div className="sub__label">{b.newsletters.mapTitle}</div>
           <Reveal>
-            <BelgiumMap committees={b.newsletters.committees} hint={b.newsletters.mapHint} />
+            <BelgiumMap
+              committees={b.newsletters.committees}
+              hint={b.newsletters.mapHint}
+            />
           </Reveal>
         </div>
 
@@ -46,20 +53,25 @@ export default function BelgiumBlock({ tone }: { tone: 'paper' | 'ink' | 'dim' }
           <div className="steps">
             {b.coaching.steps.map((s, i) => (
               <div className="step" key={s.when}>
-                <span className="step__n">{String(i + 1).padStart(2, '0')}</span>
+                <span className="step__n">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <div className="step__when">{s.when}</div>
                 <p className="step__what">{s.what}</p>
               </div>
             ))}
           </div>
-          <PhotoGrid photos={b.coaching.photos} cols={2} />
+          <PhotoGrid photos={b.coaching.photos} cols={1} />
         </div>
 
         {/* Newsletter samples */}
         <div className="sub">
           <h3 className="sub__title">{b.samples.title}</h3>
           <p>{b.samples.body}</p>
-          <PhotoGrid photos={b.samples.photos.map((p) => ({ ...p, tall: true }))} cols={2} />
+          <PhotoGrid
+            photos={b.samples.photos.map((p) => ({ ...p, tall: true }))}
+            cols={2}
+          />
         </div>
 
         <div className="toolsline">
