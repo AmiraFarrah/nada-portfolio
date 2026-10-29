@@ -17,14 +17,14 @@ export const belgium = {
   num: "01",
   title: "One newsletter, five different realities",
   org: "AIESEC in Belgium · National Internal Communications",
-  period: "July 2024 to August 2025 · Remote",
+  period: "July 2025 to December 2025 · Remote",
   intro: [
     "My job was to keep more than a hundred members across Belgium informed and motivated, month after month. Easy to say, harder to do when every city is living something different.",
   ],
   kpis: [
     { n: "100+", l: "members reached every month" },
     { n: "5", l: "local committees coached" },
-    { n: "13", l: "months without missing an issue" },
+    { n: "6", l: "months without missing an issue" },
   ],
 
   newsletters: {
